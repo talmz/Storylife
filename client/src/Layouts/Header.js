@@ -2,7 +2,8 @@ import classes from "./Header.module.css";
 import UserInfoButton from "./UserInfoButton";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
+  const isLoggedIn = props.isLoggedIn;
   return (
     <header className={classes.header}>
       <h1>StoryLife</h1>
@@ -13,10 +14,17 @@ const Header = () => {
           </li>
           <li>
             <Link to="/new">New Story</Link>
-          </li> 
+          </li>
         </ul>
       </nav>
-      <UserInfoButton />
+      {isLoggedIn ? (
+        <div>
+          <UserInfoButton text="Profile"></UserInfoButton>
+          <UserInfoButton text="Log Out"></UserInfoButton>
+        </div>
+      ) : (
+        <UserInfoButton text="Login"></UserInfoButton>
+      )}
     </header>
   );
 };

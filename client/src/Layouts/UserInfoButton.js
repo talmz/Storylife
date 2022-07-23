@@ -3,7 +3,7 @@ import classes from "./UserInfoButton.module.css";
 const UserInfoButton = (props) => {
   return (
     <button className={classes.button}>
-      <span>User Info</span>
+      <span>{props.text}</span>
     </button>
   );
 };

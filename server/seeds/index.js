@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Story = require("../models/story");
 const User = require("../models/user");
 
- const descrips = ["blabla", "glagla", "nanana", "bugabuga"];
- const titles = ["life", "vacation", "happines", "diving"];
- const images = [
+const descrips = ["blabla", "glagla", "nanana", "bugabuga"];
+const titles = ["life", "vacation", "happines", "diving"];
+const images = [
   "https://source.unsplash.com/400x400",
   "https://picsum.photos/400",
   "https://random.imagecdn.app/300/300",
@@ -44,3 +44,10 @@ const seedDB = async () => {
 };
 
 seedDB();
+
+// User.insertMany([
+//   { firstName: "tal", lastName: "ma", username: "taltol", password: "1" },
+//   { firstName: "liel", lastName: "ben", username: "luna", password: "2" },
+//   { firstName: "pizi", lastName: "hatol", username: "pizi", password: "3" },
+//   { firstName: "begin", lastName: "pm", username: "begini", password: "4" },
+// ]);

@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const cors = require("cors");
 const userRouter = require("./routes/user");
 const storyRouter = require("./routes/story");
 const ExpressError = require("./utils/ExpressError");
+const bodyParser = require("body-parser");
 
 mongoose.connect("mongodb://localhost:27017/story-life", {
   useNewUrlParser: true,
@@ -17,7 +20,13 @@ db.once("open", () => {
 });
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(cors())
+app.use(session({ secret: "tempSecert" }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+
 app.use("/user", userRouter);
 app.use("/story", storyRouter);
 
@@ -30,6 +39,6 @@ app.use((err, req, res, next) => {
   res.send(`ERROR ${statusCode} ${message}`);
 });
 
-app.listen(3000, () => {
-  console.log("Serving on port 3000");
+app.listen(4000, () => {
+  console.log("Serving on port 4000");
 });
