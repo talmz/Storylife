@@ -5,8 +5,18 @@ const Router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-Router.get("/", (req, res) => {
-  res.send("userInfo");
+Router.get("/", async (req, res) => {
+  const token = ParseToken(req);
+  if (!token) return res.json(false);
+  else {
+    const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    if (!verified) return res.json(false);
+
+    const user = await User.findById(verified.id);
+    if (!user) return res.json(false);
+
+    return res.json(user);
+  }
 });
 
 Router.post("/register", async (req, res) => {
@@ -74,3 +84,9 @@ Router.delete("/:id", (req, res) => {
 });
 
 module.exports = Router;
+
+const ParseToken = (req) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  return token;
+};

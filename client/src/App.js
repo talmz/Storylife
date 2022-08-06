@@ -38,7 +38,7 @@ function App() {
       <div className={classes.pageContent}>
         <Routes>
           <Route path="/" element={<Stories />} />
-          <Route path="/new" element={<NewStory />} />
+          <Route path="/new" element={<NewStory isLoggedIn={isLoggedIn} />} />
           <Route path="/user/login" element={<AuthForm />} />
         </Routes>
       </div>

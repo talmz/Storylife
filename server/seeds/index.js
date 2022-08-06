@@ -63,18 +63,19 @@ db.once("open", () => {
 let tempStory;
 
 const seedDB = async () => {
-  await Story.deleteMany({});
-  const Users = await User.find({});
-  Users.forEach((elem, index) => {
-    tempStory = new Story({
-      title: titles[index],
-      image: images[index],
-      date: Date(),
-      description: descrips[index],
-      user: elem,
-    });
-    tempStory.save();
-  });
+  await Story.deleteOne({ _id: "62ee490d187de1699cb49be6" });
+  await Story.deleteOne({ _id: "62ee497dcf73393580de661d" });
+  // const Users = await User.find({});
+  // Users.forEach((elem, index) => {
+  //   tempStory = new Story({
+  //     title: titles[index],
+  //     image: images[index],
+  //     date: Date(),
+  //     description: descrips[index],
+  //     user: elem,
+  //   });
+  //   tempStory.save();
+  // });
 };
 
 seedDB();

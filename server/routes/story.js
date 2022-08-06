@@ -26,6 +26,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const newStory = new Story(req.body);
+  console.log(newStory);
   await newStory.save();
   res.send(newStory);
 });
