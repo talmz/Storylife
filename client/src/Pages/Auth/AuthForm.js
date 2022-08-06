@@ -25,6 +25,7 @@ const AuthForm = () => {
 
   const sendForm = async (event) => {
     event.preventDefault();
+    var url;
     var lastname, firstname;
     if (isLogin) {
       url = "http://127.0.0.1:4000/user/login";
@@ -42,18 +43,17 @@ const AuthForm = () => {
       lastName: lastname,
       firstName: firstname,
     };
-    var url = null;
-    if (isLogin) {
-      url = "http://127.0.0.1:4000/user/login";
-    } else {
-      url = "http://127.0.0.1:4000/user/register";
-    }
+
     await axios
       .post(url, JSON.stringify(userInput), axiosConfig)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        navigate("/");
-        window.location.reload(false);
+        if (res.data) {
+          localStorage.setItem("token", res.data.token);
+          navigate("/");
+          window.location.reload(false);
+        } else {
+          console.log("error loging");
+        }
       });
   };
 

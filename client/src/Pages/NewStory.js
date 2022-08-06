@@ -74,7 +74,7 @@ const NewStory = (props) => {
           </form>
         </section>
       ) : (
-        <h1>fuckyou</h1>
+        <h1>need to implement</h1>
       )}
     </div>
   );

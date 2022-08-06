@@ -11,3 +11,4 @@ const StorySchema = new Schema({
 });
 
 module.exports = mongoose.model("Story", StorySchema);
+//NOTE : can move to package-json export module

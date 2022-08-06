@@ -41,7 +41,6 @@ Router.post("/logout", (req, res) => {
 });
 
 Router.post("/login", async (req, res) => {
-  console.log("post login");
   const { username, password } = req.body;
   const isValid = await User.findAndValidate(username, password);
   if (isValid) {
@@ -53,7 +52,7 @@ Router.post("/login", async (req, res) => {
       token: token,
     });
   } else {
-    res.send(false);
+    res.json(false);
   }
 });
 

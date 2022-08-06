@@ -55,6 +55,11 @@
   font-size: small;
   margin-top: 0;
 }
+img {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+}
 
 .cardImage {
   border-radius: 10px;
