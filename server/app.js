@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const session = require("express-session");
 const cors = require("cors");
 const userRouter = require("./routes/user");
 const storyRouter = require("./routes/story");
@@ -20,12 +19,27 @@ db.once("open", () => {
 });
 
 const app = express();
-app.use(cors())
-app.use(session({ secret: "tempSecert" }));
+const corsConfig = {
+  credentials: true,
+  origin: true,
+};
+app.use(cors(corsConfig));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use("/user", userRouter);
 app.use("/story", storyRouter);

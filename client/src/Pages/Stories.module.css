@@ -1,5 +1,6 @@
 .cardGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-template-columns: 15% 15% 15% 15%;
+  column-gap: 3%;
+  justify-content: center;
 }

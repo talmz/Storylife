@@ -26,6 +26,40 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
+// async function seeds() {
+//   var newUser = new User({
+//     firstName: "tal",
+//     lastName: "ma",
+//     username: "taltol",
+//     password: "1",
+//   });
+
+//   await newUser.save();
+//   newUser = new User({
+//     firstName: "liel",
+//     lastName: "ben",
+//     username: "luna",
+//     password: "2",
+//   });
+//   await newUser.save();
+//   newUser = new User({
+//     firstName: "pizi",
+//     lastName: "hatol",
+//     username: "pizi",
+//     password: "3",
+//   });
+//   await newUser.save();
+
+//   newUser = new User({
+//     firstName: "begin",
+//     lastName: "pm",
+//     username: "begini",
+//     password: "4",
+//   });
+//   await newUser.save();
+// }
+
+// seeds();
 let tempStory;
 
 const seedDB = async () => {
@@ -44,10 +78,3 @@ const seedDB = async () => {
 };
 
 seedDB();
-
-// User.insertMany([
-//   { firstName: "tal", lastName: "ma", username: "taltol", password: "1" },
-//   { firstName: "liel", lastName: "ben", username: "luna", password: "2" },
-//   { firstName: "pizi", lastName: "hatol", username: "pizi", password: "3" },
-//   { firstName: "begin", lastName: "pm", username: "begini", password: "4" },
-// ]);

@@ -1,5 +1,5 @@
 import classes from "./Header.module.css";
-import UserInfoButton from "./UserInfoButton";
+import { ProfileButton, LoginButton, LogoutButton } from "./UserInfoButton";
 import { Link } from "react-router-dom";
 
 const Header = (props) => {
@@ -19,11 +19,11 @@ const Header = (props) => {
       </nav>
       {isLoggedIn ? (
         <div>
-          <UserInfoButton text="Profile"></UserInfoButton>
-          <UserInfoButton text="Log Out"></UserInfoButton>
+          <ProfileButton />
+          <LogoutButton />
         </div>
       ) : (
-        <UserInfoButton text="Login"></UserInfoButton>
+        <LoginButton />
       )}
     </header>
   );

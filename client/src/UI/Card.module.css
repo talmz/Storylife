@@ -1,19 +1,19 @@
 .card {
-  background-color: rgb(228, 232, 247);
+  background-color: #f7ecde;
   color: #272727;
   padding: 20px;
   border-radius: 10px;
   border: 0px;
-  border-color: rgb(18, 91, 164);
+
   border-style: solid;
   transition: 200ms;
-  max-width: 320px;
+  max-width: 100%;
 }
 
 .card:hover {
   transition: 200ms;
   border: 3px;
-  border-color: rgb(18, 91, 164);
+  border-color: #e9dac1;
   border-style: solid;
 }
 
@@ -60,8 +60,8 @@
   border-radius: 10px;
   margin-bottom: 10px;
   margin-top: 10px;
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 100%;
+  max-height: 100%;
 }
 .card-like-icon {
   height: 25px;

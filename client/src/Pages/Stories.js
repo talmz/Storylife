@@ -1,25 +1,20 @@
 import classes from "./Stories.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "../UI/Card";
 
 const Stories = () => {
   const [stories, setStories] = useState([]);
 
-  function fetchStorieslist() {
+  useEffect(() => {
     fetch("http://localhost:4000/story")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setStories(data.stories);
-      });
-  }
-  fetchStorieslist();
+      .then((response) => response.json())
+      .then((data) => setStories(data.stories));
+  }, []);
 
   return (
     <div className={classes.cardGrid}>
       {stories.map((story) => {
-        return <Card>{story}</Card>;
+        return <Card className="grid-item">{story}</Card>;
       })}
     </div>
   );

@@ -1,4 +1,7 @@
 body {
+  background-color: #fbf8f1;
+  justify-items: center;
+
   margin: 0;
   font-family: "Hanalei Fill", cursive;
   -webkit-font-smoothing: antialiased;
