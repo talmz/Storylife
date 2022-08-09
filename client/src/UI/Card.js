@@ -2,7 +2,12 @@ import classes from "./Card.module.css";
 
 const Card = (props) => {
   return (
-    <div className={classes.card}>
+    <div
+      className={classes.card}
+      onClick={() => {
+        props.func(props.children);
+      }}
+    >
       <div className={classes.cardHeader}>
         <div className={classes.profile}>
           <span className={classes.letter}>

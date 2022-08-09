@@ -1,0 +1,141 @@
+.postDetail {
+  background-color: rgba(0, 0, 0, 0.8);
+  display: block; /* Hidden by default */
+  height: 100%; /* Full height */
+  left: 0;
+  /* overflow: auto; */
+  position: fixed; /* Stay in place */
+  top: 0;
+  width: 100%; /* Full width */
+  z-index: 1; /* Sit on top */
+}
+/* Modal Content/Box */
+.postDetailContent {
+  margin: 15% auto; /* 15% from the top and centered */
+  margin-top: 2%;
+  width: 60rem; /* Could be more or less, depending on screen size */
+}
+
+.postDetailContainer {
+  display: grid;
+}
+
+.post-detail__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1.25rem 0 0.5rem 1.25rem;
+}
+
+.postDetailClose {
+  align-items: center;
+  display: grid;
+  justify-items: right;
+  padding: 1rem 0;
+}
+
+.postDetailClose svg {
+  color: #fff;
+  height: 2rem;
+  width: 2rem;
+}
+
+.postDetailClose svg:hover {
+  cursor: pointer;
+}
+
+.postDetailMain {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.postDetailMainLeft img {
+  height: 30rem;
+  object-fit: cover;
+  width: 100%;
+}
+
+.postDetailMainRight {
+  width: 100%;
+  background-color: #fff;
+  max-height: 15rem;
+}
+
+.postDetailCreator {
+  align-items: center;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: max-content max-content max-content max-content;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.postDetailPostCreator:hover {
+  cursor: pointer;
+}
+
+.postDetailCreator img {
+  border-radius: 50%;
+  height: 2rem;
+  object-fit: cover;
+  width: 2rem;
+}
+
+.post-detail__creator span {
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+
+.post-detail__dot {
+  background: #000;
+  border-radius: 50%;
+  height: 0.25rem;
+  margin-top: 0.25rem;
+  width: 0.25rem;
+}
+
+.post-detail__follow {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.post-detail__follow:hover {
+  cursor: pointer;
+}
+
+.post-detail__reactions {
+  padding: 0.5rem 1rem;
+  padding-bottom: 0;
+}
+
+.post-detail__reactions svg {
+  color: #000;
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+}
+
+.post-detail__reactions svg:hover {
+  cursor: pointer;
+}
+
+.post-detail__number-of-reactions {
+  padding-left: 1rem;
+  font-weight: bold;
+  font-size: 0.81375rem;
+}
+
+.profile {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: tomato;
+  border-radius: 50%;
+  margin: 10px;
+  font-size: 20pt;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  justify-content: center;
+}
+
+.letter {
+  vertical-align: middle;
+}
