@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Story = require("../models/story");
 const User = require("../models/user");
+const Comment = require("../models/comments");
 
-const descrips = ["blabla", "glagla", "nanana", "bugabuga"];
+const descrips = ["blabla", "glagla", "nanana", "bugabuga", "shoko", "bannnaa"];
 const titles = ["life", "vacation", "happines", "diving"];
 const images = [
   "https://source.unsplash.com/400x400",
@@ -17,14 +18,14 @@ mongoose.connect("mongodb://localhost:27017/story-life", {
   useUnifiedTopology: true,
 });
 
-console.log(Date());
-
 const db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("Database connected");
 });
+
+mongoose.set("useFindAndModify", false);
 
 // async function seeds() {
 //   var newUser = new User({
@@ -60,22 +61,49 @@ db.once("open", () => {
 // }
 
 // seeds();
-let tempStory;
+
+// const seedDB = async () => {
+// let tempStory;
+// const Users = await User.find({});
+// Users.forEach((elem, index) => {
+//   tempStory = new Story({
+//     title: titles[index],
+//     image: images[index],
+//     date: Date(),
+//     description: descrips[index],
+//     user: elem,
+//   });
+//   tempStory.save();
+// });
+// };
+
+const deleteSubDB = async () => {
+  const comments = await Comment.find({});
+  comments.forEach(async (elem, index) => {
+    console.log(elem);
+    await Story.findByIdAndUpdate("62dc325d01f9b14ff84024d6", {
+      $pull: { comments: elem._id },
+    });
+  });
+};
 
 const seedDB = async () => {
-  await Story.deleteOne({ _id: "62ee490d187de1699cb49be6" });
-  await Story.deleteOne({ _id: "62ee497dcf73393580de661d" });
-  // const Users = await User.find({});
-  // Users.forEach((elem, index) => {
-  //   tempStory = new Story({
-  //     title: titles[index],
-  //     image: images[index],
-  //     date: Date(),
-  //     description: descrips[index],
-  //     user: elem,
-  //   });
-  //   tempStory.save();
-  // });
+  var tempComment, tempStory;
+  const Users = await User.find({});
+  Users.forEach(async (elem, index) => {
+    tempComment = new Comment({
+      date: Date(),
+      description: descrips[index],
+      user: elem,
+      story: "62dc325d01f9b14ff84024d6",
+    });
+    tempComment.save();
+
+    tempStory = await Story.findByIdAndUpdate("62dc325d01f9b14ff84024d6", {
+      $push: { comments: tempComment._id },
+    });
+  });
 };
 
 seedDB();
+// deleteSubDB();

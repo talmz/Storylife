@@ -1,252 +1,27 @@
-// import { useLocation, useParams } from "react-router-dom";
-// const { Fragment } = require("react");
-
-// const StoryInfo = (props) => {
-//   const location = useLocation();
-//   console.log(location);
-//   // const { what } = location.state;
-//   // console.log(what);
-//   return (
-//     <div>
-//       <h1>hey</h1>
-//     </div>
-//   );
-// };
-
-// export default StoryInfo;
 import classes from "./StoryInfo.module.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-// import { useEffect, useState, useContext, useCallback } from "react";
-// import axios from "axios";
-// import { useHistory } from "react-router-dom";
-// import Context from "../../context";
+let axiosConfig = {
+  headers: {
+    "Content-Type": "application/json;charset=UTF-8",
+    "Access-Control-Allow-Origin": "*",
+  },
+};
 
 const Detail = (props) => {
-  // const { toggleModal, isCloseHidden } = props;
-
-  // const [post, setPost] = useState(null);
-
-  // const { cometChat, user, setIsLoading, selectedPost, setSelectedPost } =
-  //   useContext(Context);
-
-  // const history = useHistory();
-
-  // let loadPost = null;
-  // let loadPostReaction = null;
-
-  // useEffect(() => {
-  //   if (selectedPost) {
-  //     loadPost();
-  //   }
-  // }, [selectedPost, loadPost]);
-
-  // loadPost = useCallback(async () => {
-  //   if (!selectedPost) {
-  //     return;
-  //   }
-  //   try {
-  //     setIsLoading(true);
-  //     const { id } = selectedPost;
-  //     const url = `http://localhost:8080/posts/${id}`;
-  //     const response = await axios.get(url);
-  //     if (response && response.data && response.data.message) {
-  //       alert(response.data.message);
-  //       setIsLoading(false);
-  //       return;
-  //     } else {
-  //       setPost(response.data[0]);
-  //       await loadPostReaction();
-  //     }
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //   }
-  // }, [loadPostReaction, setIsLoading, selectedPost]);
-
-  // loadPostReaction = async () => {
-  //   const userId = user.id;
-  //   const postId = selectedPost.id;
-  //   if (!userId || !postId) {
-  //     return;
-  //   }
-  //   try {
-  //     setIsLoading(true);
-  //     const url = "http://localhost:8080/reactions/get";
-  //     const response = await axios.post(url, {
-  //       post_id: postId,
-  //       user_id: userId,
-  //     });
-  //     setPost((prevPost) => ({
-  //       ...prevPost,
-  //       hasLiked:
-  //         response && response.data && response.data.message ? false : true,
-  //     }));
-  //     setIsLoading(false);
-  //     await loadUserFollower();
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // const loadUserFollower = async () => {
-  //   const { id } = user;
-  //   const { post_created_by } = selectedPost;
-  //   if (!id || !post_created_by) {
-  //     return;
-  //   }
-  //   try {
-  //     setIsLoading(true);
-  //     const url = "http://localhost:8080/followers/get";
-  //     const response = await axios.post(url, {
-  //       followerId: id,
-  //       userId: post_created_by,
-  //     });
-  //     setPost((prevPost) => ({
-  //       ...prevPost,
-  //       hasFollowed:
-  //         response && response.data && response.data.message ? false : true,
-  //     }));
-  //     setIsLoading(false);
-  //   } catch (error) {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // const close = () => {
-  //   setSelectedPost(null);
-  //   toggleModal(false);
-  // };
-
-  // const viewProfile = () => {
-  //   if (!post.post_created_by) {
-  //     return;
-  //   }
-  //   history.push(`/profile/${post.post_created_by}`);
-  // };
-
-  // const sendCustomMessage = ({ message, type, receiverId }) => {
-  //   const receiverID = receiverId;
-  //   const customType = type;
-  //   const receiverType = cometChat.RECEIVER_TYPE.USER;
-  //   const customData = { message };
-  //   const customMessage = new cometChat.CustomMessage(
-  //     receiverID,
-  //     receiverType,
-  //     customType,
-  //     customData
-  //   );
-
-  //   cometChat.sendCustomMessage(customMessage).then(
-  //     (message) => {},
-  //     (error) => {}
-  //   );
-  // };
-
-  // const removeFollow = async () => {
-  //   const url = "http://localhost:8080/followers/delete";
-  //   return await axios.post(url, {
-  //     followerId: user.id,
-  //     userId: post.post_created_by,
-  //   });
-  // };
-
-  // const updateNumberOfFollowers = async (numberOfFollowers) => {
-  //   const url = "http://localhost:8080/users/followers";
-  //   return await axios.post(url, {
-  //     id: post.post_created_by,
-  //     numberOfFollowers,
-  //   });
-  // };
-
-  // const follow = async () => {
-  //   const url = "http://localhost:8080/followers/create";
-  //   return await axios.post(url, {
-  //     followerId: user.id,
-  //     userId: post.post_created_by,
-  //   });
-  // };
-
-  // const toggleFollow = async () => {
-  //   try {
-  //     if (post.hasFollowed) {
-  //       await removeFollow();
-  //       await updateNumberOfFollowers(
-  //         post.user_number_of_followers ? post.user_number_of_followers - 1 : 0
-  //       );
-  //     } else {
-  //       await follow();
-  //       await updateNumberOfFollowers(
-  //         post.user_number_of_followers ? post.user_number_of_followers + 1 : 1
-  //       );
-  //       const customMessage = {
-  //         message: `${user.user_full_name} has followed you`,
-  //         type: "notification",
-  //         receiverId: post.post_created_by,
-  //       };
-  //       sendCustomMessage(customMessage);
-  //       await createNotification(customMessage.message);
-  //     }
-  //     await loadPost();
-  //   } catch (error) {}
-  // };
-
-  // const removeLike = async () => {
-  //   const url = "http://localhost:8080/reactions/delete";
-  //   return await axios.post(url, { postId: post.id, userId: user.id });
-  // };
-
-  // const like = async () => {
-  //   const url = "http://localhost:8080/reactions/create";
-  //   return await axios.post(url, { postId: post.id, userId: user.id });
-  // };
-
-  // const updateNumberOfReactions = async (numberOfReactions) => {
-  //   const url = "http://localhost:8080/posts/reactions";
-  //   return await axios.post(url, { id: post.id, numberOfReactions });
-  // };
-
-  // const createNotification = async (notificationMessage) => {
-  //   const url = "http://localhost:8080/notifications/create";
-  //   return await axios.post(url, {
-  //     notificationImage: user.user_avatar,
-  //     notificationMessage,
-  //     userId: post.post_created_by,
-  //   });
-  // };
-
-  // const toggleReaction = async () => {
-  //   try {
-  //     if (post.hasLiked) {
-  //       await removeLike();
-  //       await updateNumberOfReactions(
-  //         post.post_number_of_reactions ? post.post_number_of_reactions - 1 : 0
-  //       );
-  //     } else {
-  //       await like();
-  //       await updateNumberOfReactions(
-  //         post.post_number_of_reactions ? post.post_number_of_reactions + 1 : 1
-  //       );
-  //       const customMessage = {
-  //         message: `${user.user_full_name} has liked your post`,
-  //         type: "notification",
-  //         receiverId: post.post_created_by,
-  //       };
-  //       sendCustomMessage(customMessage);
-  //       await createNotification(customMessage.message);
-  //     }
-  //     await loadPost();
-  //   } catch (error) {}
-  // };
-
-  // const copyLink = () => {
-  //   navigator.clipboard.writeText(
-  //     `http:/localhost:3000/post/${selectedPost.id}`
-  //   );
-  //   alert("Link was copied!");
-  // };
-
+  const [comments, setComments] = useState([]);
   const story = props.children;
   const isCloseHidden = false;
-  console.log(story);
+
+  useEffect(() => {
+    const url = "http://localhost:4000/comment/";
+    axios.get(url, { params: { storyID: story._id } }).then((res) => {
+      setComments(res.data);
+    });
+  }, []);
+  console.log(comments);
+
   return (
     <div className={classes.postDetail}>
       <div className={classes.postDetailContent}>
@@ -321,14 +96,12 @@ const Detail = (props) => {
                 <path d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3 3.5.1 4S0 5.2.4 5.7l15.9 15.6 5.5 22.6c.1.6.6 1 1.2 1.1h.2c.5 0 1-.3 1.3-.7l23.2-39c.4-.4.4-1 .1-1.5zM5.2 6.1h35.5L18 18.7 5.2 6.1zm18.7 33.6l-4.4-18.4L42.4 8.6 23.9 39.7z"></path>
               </svg>
             </div> */}
-            {/* 
+
             <div className="post-detail__number-of-reactions">
-              <span>
-                {post?.post_number_of_reactions
-                  ? `${post?.post_number_of_reactions} liked`
-                  : "0 Liked"}
-              </span>
-            </div> */}
+              {comments.map((comment) => {
+                return <h1>{comment.description}</h1>;
+              })}
+            </div>
           </div>
         </div>
       </div>

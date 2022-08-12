@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const ParseToken = require("../utils/ParseToken");
 const express = require("express");
 const Router = express.Router();
 const jwt = require("jsonwebtoken");
@@ -10,10 +10,10 @@ Router.get("/", async (req, res) => {
   if (!token) return res.json(false);
   else {
     const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    if (!verified) return res.json(false);
+    if (!verified) return res.status(400).json("token invalid");
 
     const user = await User.findById(verified.id);
-    if (!user) return res.json(false);
+    if (!user) return res.tatus(400).json("user invalid");
 
     return res.json(user);
   }
@@ -22,12 +22,12 @@ Router.get("/", async (req, res) => {
 Router.post("/register", async (req, res) => {
   const { username, password } = req.body;
   const newUser = new User(req.body);
-  // const existingUsername = await User.findOne({ username: newUser.username });
-  // if (existingEmail) {
-  //   return res
-  //     .status(400)
-  //     .json({ msg: "An account with this email already exists" });
-  // }
+  const existingUsername = await User.findOne({ username: newUser.username });
+  if (existingEmail) {
+    return res
+      .status(400)
+      .json({ msg: "An account with this email already exists" });
+  }
   await newUser.save();
   const token = jwt.sign({ id: isValid._id }, process.env.ACCESS_TOKEN_SECRET);
   res.json({
@@ -83,9 +83,3 @@ Router.delete("/:id", (req, res) => {
 });
 
 module.exports = Router;
-
-const ParseToken = (req) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  return token;
-};
