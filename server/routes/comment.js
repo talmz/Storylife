@@ -17,7 +17,9 @@ router.get("/", async (req, res) => {
     await Story.findById(storyID)
       .populate("comments")
       .then((data) => {
-        res.json(data.comments);
+        const comments = data.comments;
+        comments.reverse();
+        res.json(comments);
       });
   } else {
     res.status(404).json("not found");
@@ -44,6 +46,9 @@ router.post("/", async (req, res) => {
       story: storyID,
     });
     await newComment.save();
+    await Story.findByIdAndUpdate(storyID, {
+      $push: { comments: newComment._id },
+    });
     return res.json(newComment);
   } else {
     console.log("wrong");
