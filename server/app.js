@@ -43,6 +43,6 @@ app.use((err, req, res, next) => {
 });
 
 // port to config
-app.listen(4000, () => {
-  console.log("Serving on port 4000");
+app.listen(8080, () => {
+  console.log("Serving on port 8080");
 });

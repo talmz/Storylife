@@ -1,8 +1,10 @@
 import classes from "./NewStory.module.css";
 import { useRef } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 const NewStory = (props) => {
+  const api_url = process.env.REACT_APP_API_URL
   const isLoggedIn = props.isLoggedIn;
   const titleInput = useRef();
   const imgInput = useRef();
@@ -21,7 +23,7 @@ const NewStory = (props) => {
           user: res,
         })
     );
-    await axios.post("http://localhost:4000/story", storyInput);
+    await axios.post(api_url + "/story", storyInput);
   };
 
   const getUserId = async () => {
@@ -29,7 +31,7 @@ const NewStory = (props) => {
     var userId;
     try {
       await axios
-        .get("http://localhost:4000/user", {
+        .get(api_url +"/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -74,7 +76,10 @@ const NewStory = (props) => {
           </form>
         </section>
       ) : (
+        <div>
         <h1>need to implement</h1>
+        <Navigate to="/user/login" />
+        </div>
       )}
     </div>
   );

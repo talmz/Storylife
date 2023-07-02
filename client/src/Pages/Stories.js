@@ -4,12 +4,14 @@ import Card from "../UI/Card";
 import StoryInfo from "./StoryInfo";
 
 const Stories = () => {
+
   const [stories, setStories] = useState([]);
   const [showStoryInfo, setShowStoryInfo] = useState(false);
   const [storyInfoDetails, setSpecificStoryInfo] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:4000/story")
+  const api_url = process.env.REACT_APP_API_URL
+    fetch(api_url + "/story")
       .then((response) => response.json())
       .then((data) => setStories(data.stories));
   }, []);

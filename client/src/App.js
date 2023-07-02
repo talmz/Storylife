@@ -9,6 +9,7 @@ import AuthForm from "./Pages/Auth/AuthForm";
 import axios from "axios";
 
 function App() {
+  const api_url = process.env.REACT_APP_API_URL
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function App() {
   const checkLogin = async (token) => {
     try {
       await axios
-        .get("http://localhost:4000/user/login", {
+        .get(api_url +"/user/login", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

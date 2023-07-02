@@ -11,13 +11,15 @@ let axiosConfig = {
 };
 
 const StoryInfo = (props) => {
+  const api_url = process.env.REACT_APP_API_URL
+
   const [comments, setComments] = useState([]);
   const story = props.children;
   const isCloseHidden = false;
   const commentText = useRef();
 
   const updateComments = async () => {
-    const url = "http://localhost:4000/comment/";
+    const url = api_url + "/comment";
     await axios.get(url, { params: { storyID: story._id } }).then((res) => {
       setComments(res.data);
     });
@@ -34,7 +36,7 @@ const StoryInfo = (props) => {
     };
     console.log(commentText.current.value);
     const token = localStorage.getItem("token");
-    await axios.post("http://localhost:4000/comment/", comment, {
+    await axios.post(api_url + "comment/", comment, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

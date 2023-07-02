@@ -12,6 +12,7 @@ let axiosConfig = {
 };
 
 const AuthForm = () => {
+  const api_url = process.env.REACT_APP_API_URL
   const navigate = useNavigate();
   const usernameInput = useRef();
   const passwordInput = useRef();
@@ -28,11 +29,11 @@ const AuthForm = () => {
     var url;
     var lastname, firstname;
     if (isLogin) {
-      url = "http://127.0.0.1:4000/user/login";
+      url = api_url +"/user/login";
       lastname = "";
       firstname = "";
     } else {
-      url = "http://127.0.0.1:4000/user/register";
+      url = api_url +"/user/register";
       lastname = lastnameInput.current.value;
       firstname = firstnameInput.current.value;
     }
