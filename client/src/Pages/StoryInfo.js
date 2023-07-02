@@ -36,7 +36,7 @@ const StoryInfo = (props) => {
     };
     console.log(commentText.current.value);
     const token = localStorage.getItem("token");
-    await axios.post(api_url + "comment/", comment, {
+    await axios.post(api_url + "/comment/", comment, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
