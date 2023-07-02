@@ -7,7 +7,7 @@ const commentRouter = require("./routes/comment");
 const ExpressError = require("./utils/ExpressError");
 const bodyParser = require("body-parser");
 
-mongoose.connect("mongodb://localhost:27017/story-life", {
+mongoose.connect("mongodb+srv://first:1234@cluster0.dtljkat.mongodb.net/Storylife", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -28,19 +28,6 @@ app.use(cors(corsConfig));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Origin", req.headers.origin);
-//   res.header(
-//     "Access-Control-Allow-Methods",
-//     "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
-//   );
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
-//   );
-//   next();
-// });
 
 app.use("/user", userRouter);
 app.use("/story", storyRouter);

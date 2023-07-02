@@ -12,7 +12,7 @@ const images = [
   "https://picsum.photos/300",
 ];
 
-mongoose.connect("mongodb://localhost:27017/story-life", {
+mongoose.connect("mongodb+srv://first:1234@cluster0.dtljkat.mongodb.net/Storylife", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -27,55 +27,55 @@ db.once("open", () => {
 
 mongoose.set("useFindAndModify", false);
 
-// async function seeds() {
-//   var newUser = new User({
-//     firstName: "tal",
-//     lastName: "ma",
-//     username: "taltol",
-//     password: "1",
-//   });
+async function seeds() {
+  var newUser = new User({
+    firstName: "tal",
+    lastName: "ma",
+    username: "taltol",
+    password: "1",
+  });
 
-//   await newUser.save();
-//   newUser = new User({
-//     firstName: "liel",
-//     lastName: "ben",
-//     username: "luna",
-//     password: "2",
-//   });
-//   await newUser.save();
-//   newUser = new User({
-//     firstName: "pizi",
-//     lastName: "hatol",
-//     username: "pizi",
-//     password: "3",
-//   });
-//   await newUser.save();
+  await newUser.save();
+  newUser = new User({
+    firstName: "liel",
+    lastName: "ben",
+    username: "luna",
+    password: "2",
+  });
+  await newUser.save();
+  newUser = new User({
+    firstName: "pizi",
+    lastName: "hatol",
+    username: "pizi",
+    password: "3",
+  });
+  await newUser.save();
 
-//   newUser = new User({
-//     firstName: "begin",
-//     lastName: "pm",
-//     username: "begini",
-//     password: "4",
-//   });
-//   await newUser.save();
-// }
+  newUser = new User({
+    firstName: "begin",
+    lastName: "pm",
+    username: "begini",
+    password: "4",
+  });
+  await newUser.save();
+}
 
-// seeds();
+//seeds();
 
-// const seedDB = async () => {
-// let tempStory;
-// const Users = await User.find({});
-// Users.forEach((elem, index) => {
-//   tempStory = new Story({
-//     title: titles[index],
-//     image: images[index],
-//     date: Date(),
-//     description: descrips[index],
-//     user: elem,
-//   });
-//   tempStory.save();
-// });
-// };
+const seedDB = async () => {
+let tempStory;
+const Users = await User.find({});
+Users.forEach((elem, index) => {
+  tempStory = new Story({
+    title: titles[index],
+    image: images[index],
+    date: Date(),
+    description: descrips[index],
+    user: elem,
+  });
+  tempStory.save();
+});
+};
 
 const deleteSubDB = async () => {
   const comments = await Comment.find({});
@@ -87,23 +87,23 @@ const deleteSubDB = async () => {
   });
 };
 
-const seedDB = async () => {
-  var tempComment, tempStory;
-  const Users = await User.find({});
-  Users.forEach(async (elem, index) => {
-    tempComment = new Comment({
-      date: Date(),
-      description: descrips[index],
-      user: elem,
-      story: "62dc325d01f9b14ff84024d6",
-    });
-    tempComment.save();
+// const seedDB = async () => {
+//   var tempComment, tempStory;
+//   const Users = await User.find({});
+//   Users.forEach(async (elem, index) => {
+//     tempComment = new Comment({
+//       date: Date(),
+//       description: descrips[index],
+//       user: elem,
+//       story: "62dc325d01f9b14ff84024d6",
+//     });
+//     tempComment.save();
 
-    tempStory = await Story.findByIdAndUpdate("62dc325d01f9b14ff84024d6", {
-      $push: { comments: tempComment._id },
-    });
-  });
-};
+//     tempStory = await Story.findByIdAndUpdate("62dc325d01f9b14ff84024d6", {
+//       $push: { comments: tempComment._id },
+//     });
+//   });
+// };
 
-seedDB();
+seedDB()
 // deleteSubDB();

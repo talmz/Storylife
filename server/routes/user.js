@@ -23,13 +23,14 @@ Router.post("/register", async (req, res) => {
   const { username, password } = req.body;
   const newUser = new User(req.body);
   const existingUsername = await User.findOne({ username: newUser.username });
-  if (existingEmail) {
+  if (existingUsername) {
     return res
       .status(400)
       .json({ msg: "An account with this email already exists" });
   }
+  console.log(existingUsername)
   await newUser.save();
-  const token = jwt.sign({ id: isValid._id }, process.env.ACCESS_TOKEN_SECRET);
+  const token = jwt.sign({ id: newUser._id }, process.env.ACCESS_TOKEN_SECRET);
   res.json({
     token: token,
   });
