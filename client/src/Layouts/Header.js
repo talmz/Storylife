@@ -45,7 +45,7 @@ function ResponsiveAppBar(props) {
             {pages.map((page) => (
               <Button
                 key={page}
-                sx={{ my: 2, color: '#FAEAB1', display: 'block' , '&:hover': {
+                sx={{ my: 2, color: 'white',display: 'block' , '&:hover': {
                   backgroundColor: '#E5BA73',
                   borderColor: '#0062cc',
                   boxShadow: 'none',

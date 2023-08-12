@@ -1,7 +1,12 @@
 import classes from "./StoryInfo.module.css";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import LikeButton from "../UI/LikeButton";
+import * as React from 'react';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/material/Box';
+import ListItemButton from '@mui/material/ListItemButton';
+import { FixedSizeList } from 'react-window';
 
 let axiosConfig = {
   headers: {
@@ -44,6 +49,18 @@ const StoryInfo = (props) => {
     commentText.current.value = "";
   };
 
+  function renderRow(props) {
+    
+
+    return (
+      <ListItem>
+        <ListItemButton>
+          <ListItemText primary={props.description} />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
+
   return (
     <div className={classes.postDetail}>
       <div className={classes.postDetailContent}>
@@ -74,7 +91,7 @@ const StoryInfo = (props) => {
               </div>
               <span
                 className={classes.postDetailPostCreator}
-                //onClick={viewProfile}
+              //onClick={viewProfile}
               >
                 {story.user.firstName + " " + story.user.lastName}
               </span>
@@ -91,22 +108,25 @@ const StoryInfo = (props) => {
               )} */}
             </div>
 
-            <div className={classes.postDetailComments}>
-              {comments.map((comment) => {
-                return <h1>{comment.description}</h1>;
-              })}
-            </div>
-            <div className={classes.postDetailAddComment}>
-              <textarea placeholder="Add Comment" ref={commentText}></textarea>
-              <button onClick={postComment}>Post</button>
-            </div>
-            <div>
-              <LikeButton></LikeButton>
-            </div>
+            <Box sx={{ width: '100%', height: '70%', maxWidth: '100%', bgcolor: 'background.paper' , overflow: "hidden",
+          overflowY: "scroll",}}>
+              {
+                comments.map((comment) => {
+                  return renderRow(comment)
+                })
+              }
+          </Box>
+          <div className={classes.postDetailAddComment}>
+            <textarea placeholder="Add Comment" ref={commentText}></textarea>
+            <button onClick={postComment}>Post</button>
           </div>
+
         </div>
       </div>
     </div>
+    </div >
   );
 };
 export default StoryInfo;
+
+

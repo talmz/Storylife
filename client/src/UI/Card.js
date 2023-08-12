@@ -21,9 +21,9 @@ export default function StoryCard(props) {
     <Card sx={{ backgroundColor: "#E5BA73", maxWidth: 345 }} >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {props.children.user.firstName[0] + props.children.user.lastName[0]}
-          </Avatar>
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              {props.children.user.firstName[0] + props.children.user.lastName[0]}
+            </Avatar>
         }
         action={
           <IconButton aria-label="settings">
@@ -49,7 +49,8 @@ export default function StoryCard(props) {
           <FavoriteIcon />
         </IconButton>
         <Button sx={{
-          color: "#C58940", '&:hover': {
+                  backgroundColor: '#E5BA73',
+                  color: "black", '&:hover': {
             backgroundColor: '#FAEAB1',
             borderColor: '#0062cc',
             boxShadow: 'none',
