@@ -1,13 +1,18 @@
+
+@font-face {
+  font-family: "Light";   /*Can be any text*/
+  src: local("AirbnbCerealLight"),
+    url("./Fonts/Andika-Regular.ttf") format("truetype");
+}
+
 body {
-  background-color: #fbf8f1;
+  background-color: #FAF8F1;
   justify-items: center;
 
   margin: 0;
-  font-family: "Hanalei Fill", cursive;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Light';
 }
 
-code {
-  font-family: "Hanalei Fill", cursive;
-}
+/* code {
+  font-family: "Kevin Systrom", cursive;
+} */

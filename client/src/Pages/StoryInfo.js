@@ -34,7 +34,6 @@ const StoryInfo = (props) => {
       description: commentText.current.value,
       storyID: story._id,
     };
-    console.log(commentText.current.value);
     const token = localStorage.getItem("token");
     await axios.post(api_url + "/comment/", comment, {
       headers: {

@@ -1,32 +1,64 @@
-import classes from "./Card.module.css";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Button from '@mui/material/Button';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const Card = (props) => {
+
+export default function StoryCard(props) {
+
+  var date = new Date(props.children.date);
+
   return (
-    <div
-      className={classes.card}
-      onClick={() => {
-        props.func(props.children);
-      }}
-    >
-      <div className={classes.cardHeader}>
-        <div className={classes.profile}>
-          <span className={classes.letter}>
+    <Card sx={{ backgroundColor: "#E5BA73", maxWidth: 345 }} >
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             {props.children.user.firstName[0] + props.children.user.lastName[0]}
-          </span>
-        </div>
-        <div className={classes.cardTitleGroupp}>
-          <h5 className={classes.cardTitle}>{props.children.title}</h5>
-          <div className={classes.cardDate}>{props.children.date}</div>
-        </div>
-      </div>
-      <img
-        className={classes.cardImage}
-        src={props.children.image}
-        alt="Logo"
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={props.children.title}
+        subheader={date.toDateString()}
       />
-      <div className={classes.cardText}>{props.children.description}</div>
-    </div>
-  );
-};
+      <CardMedia
+        component="img"
+        height="194"
+        image={props.children.image}
+        alt="Paella dish"
+      />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          {props.children.description}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <Button sx={{
+          color: "#C58940", '&:hover': {
+            backgroundColor: '#FAEAB1',
+            borderColor: '#0062cc',
+            boxShadow: 'none',
+          }
+        }} onClick={() => {
+          props.func(props.children);
+        }} size="small">Comment</Button>
+      </CardActions>
 
-export default Card;
+    </Card>
+  );
+}

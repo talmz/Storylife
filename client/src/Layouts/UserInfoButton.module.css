@@ -2,19 +2,18 @@
   cursor: pointer;
   font: inherit;
   border: none;
-  background-color: #76ba99;
+  background-color: #99A98F;
   color: white;
-  padding: 0.75rem 3rem;
-  display: flex;
+  display:inline-block;
   justify-content: space-around;
   align-items: center;
-  border-radius: 25px;
   font-weight: bold;
+  margin-left: 5px;
 }
 
 .button:hover,
 .button:active {
-  background-color: #0d224f;
+  background-color: #C1D0B5;
 }
 
 .icon {

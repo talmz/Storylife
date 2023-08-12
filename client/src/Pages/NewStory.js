@@ -1,15 +1,15 @@
 import classes from "./NewStory.module.css";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 const NewStory = (props) => {
   const api_url = process.env.REACT_APP_API_URL
-  const isLoggedIn = props.isLoggedIn;
   const titleInput = useRef();
   const imgInput = useRef();
   const descriptionInput = useRef();
-
+  const isLoggedIn = props.isLoggedIn
+  console.log(props.isLoggedIn)
   const createStory = async (event) => {
     event.preventDefault();
     var storyInput;
@@ -77,8 +77,7 @@ const NewStory = (props) => {
         </section>
       ) : (
         <div>
-        <h1>need to implement</h1>
-        <Navigate to="/user/login" />
+        <h1 style={{ textAlign: "center"}}>need to implement</h1>
         </div>
       )}
     </div>
